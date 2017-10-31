@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import BlogTile from './subcomponents/BlogTile';
 import UserTile from './subcomponents/UserTile';
-
-// import axios
+import axios from 'axios'
 
 class Search extends Component{
     constructor(){
@@ -18,6 +17,10 @@ class Search extends Component{
     
     
     // insert search method
+    search(event){
+        event.preventDefault()
+
+    }
     
     
     render(){
@@ -93,11 +96,11 @@ class Search extends Component{
                         searchType: searchType
                     })
                 }
-            })
+            }).catch(console.log)
         } else {
             this.setState({
-                blogResults: [],
-                userResults: []
+            blogResults: this.state.blogResults.map((e, i) => <BlogTile key={i} blog={e}/>),
+            userResults: this.state.userResults.map((e, i) => <UserTile key={i} user={e}/>)
             })
         }
     }
